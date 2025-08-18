@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <link href="CSS/Giohang.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="website4">
+        <h1>Giỏ hàng của bạn</h1>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>Xoá</th>
+                </tr>
+            </thead>
+            <tbody id="cart-body">
+                <tr>
+                    <td><img src="AnhTrangchu/SP_banchay/Giày cầu lông lining nư.jpeg" /></td>
+                    <td>Giày Thể Thao Nam A1</td>
+                    <td class="price">1200000</td>
+                    <td>
+                        <div class="quantity-control">
+                            <button class="minus">-</button>
+                            <span class="quantity">1</span>
+                            <button class="plus">+</button>
+                        </div>
+                    </td>
+                    <td class="item-total">1.200.000đ</td>
+                    <td><button class="delete-btn">X</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="AnhTrangchu/SP_banchay/Giày Luyện Tập Nữ Nike Zoom Bella 6.png" />
+                    </td>
+                    <td>Giày luyện tập nữ</td>
+                    <td class="price">1200000</td>
+                    <td>
+                        <div class="quantity-control">
+                            <button class="minus">-</button>
+                            <span class="quantity">1</span>
+                            <button class="plus">+</button>
+                        </div>
+                    </td>
+                    <td class="item-total">1.200.000đ</td>
+                    <td><button class="delete-btn">X</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="AnhTrangchu/SP_nam/giay-the-thao-nam-tmtt26-hien-dai.png" />
+                    </td>
+                    <td>Giày thể thao nam tmtt26 hiện đại</td>
+                    <td class="price">1500000</td>
+                    <td>
+                        <div class="quantity-control">
+                            <button class="minus">-</button>
+                            <span class="quantity">1</span>
+                            <button class="plus">+</button>
+                        </div>
+                    </td>
+                    <td class="item-total">1.200.000đ</td>
+                    <td><button class="delete-btn">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="total">
+            <strong>Tổng cộng:</strong> <span id="total-price">3.600.000đ</span>
+        </div>
+
+        <div class="cart-actions">
+            <button onclick="window.location.href='trangchu.html'">Về trang chủ</button>
+            <button>Thanh toán</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿body {
+    font-family: 'Times New Roman', Arial, sans-serif;
+    text-align: justify;
+}
+
+#trang {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    height: 320px;
+    width: 250px;
+    background-color: rgb(228,236,228);
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+form {
+    border: 2px solid rgb(106,106,106);
+    border-radius: 5px;
+    padding: 20px;
+    background-color: rgb(231,224,231);
+}
+
+h3 {
+    text-align: center;
+    font-size: 18px;
+}
+
+.dangnhap {
+    margin: 15px 0px;
+    position: relative;
+}
+.dangnhap input {
+    width: 170px;
+    height: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    padding: 10px;
+    color: black;
+    font-size: 14px;
+}
+
+.dangnhap label {
+    position: absolute;
+    padding: 0 5px;
+    left: 5px;
+    top: 50%;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+    background: white;
+}
+
+.dangnhap input:focus {
+    border: 2px solid #1a73e8;
+}
+
+.dangnhap input:focus + label,
+.dangnhap input:valid + label {
+    top: 0px;
+    font-size: 14px;
+    color: #1a73e8;
+}
+#btn-login {
+    opacity: 0.85;
+    margin: 0px auto;
+    margin-top: 50px;
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+}
+/* Căn giữa dòng Không có tài khoản? Đăng kí */
+.taikhoan {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.taikhoan a:first-child {
+    color: #333;
+    text-decoration: none;
+}
+
+.taikhoan a:last-child {
+    color: #1a73e8;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.taikhoan a:hover {
+    text-decoration: underline;
+}
