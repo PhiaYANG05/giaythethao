@@ -1,34 +1,35 @@
-﻿// Sanpham.js
-document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll("button");
+﻿document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".sp button"); // tất cả nút trong .sp
 
     buttons.forEach(button => {
-        if (button.textContent.trim().toLowerCase() === "mua ngay") {
-            button.addEventListener("click", function () {
-                const parent = button.parentElement;
-                const img = parent.querySelector("img").getAttribute("src");
-                const name = parent.querySelectorAll("a")[0].textContent;
-                const price = parent.querySelector("span").textContent.replace(/\./g, "").trim();
+        button.addEventListener("click", function () {
+            const productDiv = button.parentElement; // div chứa 1 sản phẩm
 
-                const product = {
-                    img,
-                    name,
-                    price: parseInt(price),
-                    quantity: 1
-                };
+            const img = productDiv.querySelector("img").getAttribute("src");
+            const name = productDiv.querySelector("a").textContent.trim(); // lấy tên (thẻ a đầu tiên)
+            const priceText = productDiv.querySelector("span").textContent.trim();
+            const price = parseInt(priceText.replace(/\./g, "")); // bỏ dấu chấm
 
-                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const product = {
+                img,
+                name,
+                price,
+                quantity: 1
+            };
 
-                const existing = cart.find(item => item.name === product.name);
-                if (existing) {
-                    existing.quantity += 1;
-                } else {
-                    cart.push(product);
-                }
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-                localStorage.setItem("cart", JSON.stringify(cart));
-                alert("Đã thêm vào giỏ hàng!");
-            });
-        }
+            const existing = cart.find(item => item.name === product.name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push(product);
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            alert(`Đã thêm "${name}" vào giỏ hàng!`);
+            console.log("Giỏ hàng hiện tại:", cart);
+        });
     });
 });

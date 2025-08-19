@@ -182,16 +182,50 @@ ul.dropdown li img{
     width: 300px;
     text-align: center;
 }
+.SP_banchay >* ul{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex; /*để li nằm cạnh nhau nếu nhiều sản phẩm*/
+    gap: 20px; /*khoảng cách giữa các li */
+}
+.SP_banchay >* ul li{
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    width: 170px;
+    transition: transition 0.2s;
+}
+.SP_banchay >* ul li:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 .SP_banchay >* img{
     width: 100%;
-    height: 120px;
+    height: auto;
+    border-radius:10px ;
+}
+.SP_banchay >* ul li h3{
+    font-size: 16px;
+    margin: 5px 0px;
+    color: #333;
 }
 .SP_banchay >* span{
     color: rgb(235,33,29);
+    font-weight: bold;
 }
 .SP_banchay >* button{
     color: white;
     background-color: blue;
+    margin-top: 5px;
+    padding: 8px 0px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.SP_banchay >* button:hover{
+    background-color: #457b9d;
 }
 @keyframes truotAnh {
     0% { transform: translateX(600px); }
@@ -199,7 +233,7 @@ ul.dropdown li img{
 }
 #phanchinh input[type] {
     text-align: center;
-    margin: 0px 50%;
+    margin: 20px 50%;
     margin-bottom: 10px;
     color: blue;
 }

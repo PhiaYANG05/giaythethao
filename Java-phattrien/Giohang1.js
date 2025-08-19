@@ -1,78 +1,77 @@
-﻿// Giohang.js
-function formatCurrency(num) {
-    return num.toLocaleString("vi-VN") + "đ";
-}
-
-function loadCart() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+﻿document.addEventListener("DOMContentLoaded", () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const cartBody = document.getElementById("cart-body");
-    const emptyMsg = document.getElementById("empty-message");
-    const totalPriceEl = document.getElementById("total-price");
-    cartBody.innerHTML = "";
-    let total = 0;
+    const totalEl = document.getElementById("total-price") || document.getElementById("cart-total");
 
-    if (cart.length === 0) {
-        emptyMsg.style.display = "block";
-        totalPriceEl.textContent = "0đ";
-        return;
+    function save() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+    function fmt(n) {
+        return n.toLocaleString("vi-VN") + "đ";
     }
 
-    emptyMsg.style.display = "none";
+    function render() {
+        cartBody.innerHTML = "";
 
-    cart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
+        if (!cart || cart.length === 0) {
+            cartBody.innerHTML = `<tr><td colspan="6">Bạn chưa thêm sản phẩm nào vào giỏ hàng</td></tr>`;
+            if (totalEl) totalEl.textContent = "0đ";
+            return;
+        }
 
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td><img src="${item.img}" /></td>
-            <td>${item.name}</td>
-            <td class="price">${item.price}</td>
-            <td>
-                <div class="quantity-control">
-                    <button class="minus" data-index="${index}">-</button>
-                    <span class="quantity">${item.quantity}</span>
-                    <button class="plus" data-index="${index}">+</button>
-                </div>
-            </td>
-            <td class="item-total">${formatCurrency(itemTotal)}</td>
-            <td><button class="delete-btn" data-index="${index}">X</button></td>
-        `;
-        cartBody.appendChild(tr);
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const itemTotal = (Number(item.price) || 0) * (Number(item.quantity) || 1);
+            total += itemTotal;
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td><img src="${item.img}" width="80" /></td>
+                <td>${item.name}</td>
+                <td class="price">${Number(item.price).toLocaleString("vi-VN")}đ</td>
+                <td>
+                    <button class="qty-btn decrease" data-index="${index}">-</button>
+                    <button class="qty-display" disabled>${item.quantity}</button>
+                    <button class="qty-btn increase" data-index="${index}">+</button>
+                </td>
+                <td class="item-total">${itemTotal.toLocaleString("vi-VN")}đ</td>
+                <td><button class="delete-btn" data-index="${index}">Xóa</button></td>
+            `;
+            cartBody.appendChild(tr);
+        });
+
+        if (totalEl) totalEl.textContent = total.toLocaleString("vi-VN") + "đ";
+    }
+
+    // Xóa sản phẩm
+    cartBody.addEventListener("click", (e) => {
+        if (e.target.classList.contains("delete-btn")) {
+            const idx = Number(e.target.dataset.index);
+            if (!Number.isNaN(idx)) {
+                cart.splice(idx, 1);
+                save();
+                render();
+            }
+        }
     });
 
-    totalPriceEl.textContent = formatCurrency(total);
-
-    document.querySelectorAll(".plus").forEach(btn =>
-        btn.addEventListener("click", function () {
-            const index = btn.getAttribute("data-index");
-            cart[index].quantity += 1;
-            localStorage.setItem("cart", JSON.stringify(cart));
-            loadCart();
-        })
-    );
-
-    document.querySelectorAll(".minus").forEach(btn =>
-        btn.addEventListener("click", function () {
-            const index = btn.getAttribute("data-index");
-            if (cart[index].quantity > 1) {
-                cart[index].quantity -= 1;
-            } else {
-                cart.splice(index, 1);
+    // Tăng / Giảm số lượng
+    cartBody.addEventListener("click", (e) => {
+        const idx = Number(e.target.dataset.index);
+        if (e.target.classList.contains("increase")) {
+            cart[idx].quantity++;
+            save();
+            render();
+        }
+        if (e.target.classList.contains("decrease")) {
+            if (cart[idx].quantity > 1) {
+                cart[idx].quantity--;
+                save();
+                render();
             }
-            localStorage.setItem("cart", JSON.stringify(cart));
-            loadCart();
-        })
-    );
+        }
+    });
 
-    document.querySelectorAll(".delete-btn").forEach(btn =>
-        btn.addEventListener("click", function () {
-            const index = btn.getAttribute("data-index");
-            cart.splice(index, 1);
-            localStorage.setItem("cart", JSON.stringify(cart));
-            loadCart();
-        })
-    );
-}
-
-document.addEventListener("DOMContentLoaded", loadCart);
+    render();
+});
