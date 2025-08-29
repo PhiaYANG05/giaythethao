@@ -226,6 +226,10 @@ ul.dropdown li img{
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: 0.2s;
 }
+.sp >* ul li:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 .sp > * ul li h3{
     font-size: 16px;
     margin: 0px 0px;
